@@ -22,7 +22,7 @@ POSTGRES_PORT=5432
 ## Запуск
 ```bash
 #билд, миграции выполняются сами в docker-entrypoint.sh
-docker compose up --build
+docker compose up --build -d
 #заполнение данными
 docker compose exec web python manage.py seed_db
 ```
