@@ -9,20 +9,20 @@ from projects import models
 class ProjectAdmin(admin.ModelAdmin):
     """Admin configuration for Projects."""
 
-    list_display = ('name', 'owner', 'status', 'created_at')
-    list_filter = ('status', 'created_at')
-    search_fields = ('name', 'owner__email', 'description')
+    list_display = ("name", "owner", "status", "created_at")
+    list_filter = ("status", "created_at")
+    search_fields = ("name", "owner__email", "description")
 
-    readonly_fields = ('created_at',)
+    readonly_fields = ("created_at",)
 
-    filter_horizontal = ('participants',)
+    filter_horizontal = ("participants",)
 
     fieldsets = (
         (
-            'Basic Information',
-            {'fields': ('name', 'description', 'owner', 'status')},
+            "Basic Information",
+            {"fields": ("name", "description", "owner", "status")},
         ),
-        ('Links', {'fields': ('github_url',)}),
-        ('Project Team', {'fields': ('participants',)}),
-        ('Dates', {'fields': ('created_at',)}),
+        ("Links", {"fields": ("github_url",)}),
+        ("Project Team", {"fields": ("participants",)}),
+        ("Dates", {"fields": ("created_at",)}),
     )

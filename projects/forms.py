@@ -11,9 +11,9 @@ class ProjectForm(GithubUrlValidationMixin, forms.ModelForm):
 
     class Meta:
         model = Project
-        fields = ('name', 'description', 'github_url')
+        fields = ("name", "description", "github_url")
         labels = {
-            'name': 'Название проекта',
-            'description': 'Описание проекта',
-            'github_url': 'Ссылка на Github',
+            "name": "Название проекта",
+            "description": "Описание проекта",
+            "github_url": "Ссылка на Github",
         }

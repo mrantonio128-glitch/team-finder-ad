@@ -12,15 +12,15 @@ class Project(GithubLinkMixin):
     """Project model."""
 
     class Status(models.TextChoices):
-        OPEN = 'open', 'Открыт'
-        CLOSED = 'closed', 'Закрыт'
+        OPEN = "open", "Открыт"
+        CLOSED = "closed", "Закрыт"
 
     name = models.CharField(max_length=PROJECT_NAME_MAX_LENGTH)
     description = models.TextField(blank=True, null=True)
 
     owner = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        related_name='owned_projects',
+        related_name="owned_projects",
         on_delete=models.CASCADE,
     )
     created_at = models.DateTimeField(auto_now_add=True)
@@ -31,7 +31,7 @@ class Project(GithubLinkMixin):
     )
     participants = models.ManyToManyField(
         settings.AUTH_USER_MODEL,
-        related_name='participated_projects',
+        related_name="participated_projects",
         blank=True,
     )
 
@@ -41,4 +41,4 @@ class Project(GithubLinkMixin):
 
     def get_absolute_url(self) -> str:
         """Canonical project url."""
-        return reverse('projects:detail', kwargs={'pk': self.pk})
+        return reverse("projects:detail", kwargs={"pk": self.pk})

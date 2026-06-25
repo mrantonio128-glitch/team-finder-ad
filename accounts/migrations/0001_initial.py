@@ -7,29 +7,51 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='User',
+            name="User",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('password', models.CharField(max_length=128, verbose_name='password')),
-                ('last_login', models.DateTimeField(blank=True, null=True, verbose_name='last login')),
-                ('is_superuser', models.BooleanField(default=False, help_text='Designates that this user has all permissions without explicitly assigning them.', verbose_name='superuser status')),
-                ('github_url', models.URLField(blank=True, null=True)),
-                ('email', models.EmailField(max_length=254, unique=True)),
-                ('name', models.CharField(max_length=124)),
-                ('surname', models.CharField(max_length=124)),
-                ('avatar', models.ImageField(blank=True, null=True, upload_to='avatars')),
-                ('phone', models.CharField(max_length=12)),
-                ('about', models.TextField(blank=True, max_length=256, null=True)),
-                ('is_active', models.BooleanField(default=True)),
-                ('is_staff', models.BooleanField(default=False)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("password", models.CharField(max_length=128, verbose_name="password")),
+                (
+                    "last_login",
+                    models.DateTimeField(
+                        blank=True, null=True, verbose_name="last login"
+                    ),
+                ),
+                (
+                    "is_superuser",
+                    models.BooleanField(
+                        default=False,
+                        help_text="Designates that this user has all permissions without explicitly assigning them.",
+                        verbose_name="superuser status",
+                    ),
+                ),
+                ("github_url", models.URLField(blank=True, null=True)),
+                ("email", models.EmailField(max_length=254, unique=True)),
+                ("name", models.CharField(max_length=124)),
+                ("surname", models.CharField(max_length=124)),
+                (
+                    "avatar",
+                    models.ImageField(blank=True, null=True, upload_to="avatars"),
+                ),
+                ("phone", models.CharField(max_length=12)),
+                ("about", models.TextField(blank=True, max_length=256, null=True)),
+                ("is_active", models.BooleanField(default=True)),
+                ("is_staff", models.BooleanField(default=False)),
             ],
             options={
-                'abstract': False,
+                "abstract": False,
             },
         ),
     ]

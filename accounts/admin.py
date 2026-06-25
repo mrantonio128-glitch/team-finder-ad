@@ -10,63 +10,59 @@ UserModel = get_user_model()
 BASIC_FIELDSET = (
     None,
     {
-        'fields': (
-            'email',
-            'password',
+        "fields": (
+            "email",
+            "password",
         )
     },
 )
 
 PERSONAL_INFO_FIELDSET = (
-    'Personal Info',
+    "Personal Info",
     {
-        'fields': (
-            'name',
-            'surname',
-            'avatar',
-            'phone',
-            'about',
-            'github_url',
+        "fields": (
+            "name",
+            "surname",
+            "avatar",
+            "phone",
+            "about",
+            "github_url",
         )
     },
 )
 
 PERMISSIONS_FIELDSET = (
-    'Permissions',
+    "Permissions",
     {
-        'fields': (
-            'is_staff',
-            'is_active',
-            'groups',
-            'user_permissions',
+        "fields": (
+            "is_staff",
+            "is_active",
+            "groups",
+            "user_permissions",
         )
     },
 )
 
 RELATIONS_FIELDSET = (
-    'Relations',
-    {
-        'fields': (
-            'favorites',
-        )
-    },
+    "Relations",
+    {"fields": ("favorites",)},
 )
 
 ADD_FIELDSET = (
     None,
     {
-        'classes': ('wide',),
-        'fields': (
-            'email',
-            'password1',
-            'password2',
-            'name',
-            'surname',
-            'phone',
-            'is_staff',
-            'is_active',
-            'groups',
-            'user_permissions',
+        "classes": ("wide",),
+        "fields": (
+            "email",
+            "password1",
+            "password2",
+            "name",
+            "surname",
+            "phone",
+            "is_staff",
+            "is_active",
+            "groups",
+            "user_permissions",
         ),
     },
 )
@@ -79,31 +75,31 @@ class UserAdmin(BaseUserAdmin):
     model = UserModel
 
     list_display = (
-        'email',
-        'name',
-        'surname',
-        'is_staff',
-        'is_active',
+        "email",
+        "name",
+        "surname",
+        "is_staff",
+        "is_active",
     )
 
     list_filter = (
-        'is_staff',
-        'is_active',
+        "is_staff",
+        "is_active",
     )
 
     search_fields = (
-        'email',
-        'name',
-        'surname',
-        'phone',
+        "email",
+        "name",
+        "surname",
+        "phone",
     )
 
-    ordering = ('email',)
+    ordering = ("email",)
 
     filter_horizontal = (
-        'groups',
-        'user_permissions',
-        'favorites',
+        "groups",
+        "user_permissions",
+        "favorites",
     )
 
     fieldsets = (
@@ -113,6 +109,4 @@ class UserAdmin(BaseUserAdmin):
         RELATIONS_FIELDSET,
     )
 
-    add_fieldsets = (
-        ADD_FIELDSET,
-    )
+    add_fieldsets = (ADD_FIELDSET,)

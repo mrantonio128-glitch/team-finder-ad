@@ -22,27 +22,25 @@ class User(AbstractBaseUser, PermissionsMixin, GithubLinkMixin):
     surname = models.CharField(max_length=USER_NAME_MAX_LEN)
 
     avatar = models.ImageField(
-        upload_to='avatars',
+        upload_to="avatars",
         blank=True,
         null=True,
         validators=[validate_avatar_file_size],
     )
     phone = models.CharField(max_length=USER_PHONE_MAX_LEN)
-    about = models.TextField(
-        blank=True, null=True, max_length=USER_ABOUT_MAX_LEN
-    )
+    about = models.TextField(blank=True, null=True, max_length=USER_ABOUT_MAX_LEN)
 
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
     favorites = models.ManyToManyField(
-        'projects.Project',
-        related_name='interested_users',
+        "projects.Project",
+        related_name="interested_users",
         blank=True,
     )
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ('name', 'surname', 'phone')
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = ("name", "surname", "phone")
 
     objects = UserManager()
 
@@ -50,7 +48,7 @@ class User(AbstractBaseUser, PermissionsMixin, GithubLinkMixin):
         return self.email
 
     def get_absolute_url(self) -> str:
-        return reverse('users:profile', kwargs={'pk': self.pk})
+        return reverse("users:profile", kwargs={"pk": self.pk})
 
     def save(self, *args: Any, **kwargs: Any) -> None:
         """Override save to add pfp."""

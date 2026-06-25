@@ -12,10 +12,7 @@ def validate_github_url(value: str | None) -> str | None:
     parsed = urlparse(value)
     domain = parsed.netloc.lower()
 
-    if (
-        parsed.scheme not in GH_ALLOWED_SCHEME
-        or domain not in GH_ALLOWED_DOMAIN
-    ):
+    if parsed.scheme not in GH_ALLOWED_SCHEME or domain not in GH_ALLOWED_DOMAIN:
         raise ValidationError(ERR_GH_MSG)
 
     return value
@@ -24,5 +21,5 @@ def validate_github_url(value: str | None) -> str | None:
 class GithubUrlValidationMixin:
     def clean_github_url(self) -> str | None:
         return validate_github_url(
-            self.cleaned_data.get('github_url'),
+            self.cleaned_data.get("github_url"),
         )

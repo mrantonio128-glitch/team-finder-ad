@@ -22,47 +22,43 @@ from accounts.forms import (
 )
 from accounts.models import User
 
+FILTER_QUERIES = {
+    FilterType.OWNERS_OF_FAVORITES: "owned_projects__interested_users",
+    FilterType.OWNERS_OF_PARTICIPATING: "owned_projects__participants",
+    FilterType.INTERESTED: "favorites__owner",
+    FilterType.PARTICIPANTS: "participated_projects__owner",
+}
+
 
 class RegisterView(CreateView):
     model = User
     form_class = UserRegistrationForm
-    template_name = 'users/register.html'
-    success_url = reverse_lazy('users:login')
+    template_name = "users/register.html"
+    success_url = reverse_lazy("users:login")
 
 
 class SignInView(AuthLoginView):
-    template_name = 'users/login.html'
+    template_name = "users/login.html"
     form_class = UserLoginForm
-    next_page = reverse_lazy('projects:list')
+    next_page = reverse_lazy("projects:list")
 
 
 class LogoutView(View):
-    def get(
-        self, request: HttpRequest, *args: Any, **kwargs: Any
-    ) -> HttpResponse:
+    def get(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
         logout(request)
-        return redirect('projects:list')
+        return redirect("projects:list")
 
 
 class UserListView(ListView):
     model = User
-    template_name = 'users/participants.html'
-    context_object_name = 'participants'
+    template_name = "users/participants.html"
+    context_object_name = "participants"
     paginate_by = USER_PAGINATE_BY
-
-    FILTER_QUERIES = {
-        FilterType.OWNERS_OF_FAVORITES:
-            'owned_projects__interested_users',
-        FilterType.OWNERS_OF_PARTICIPATING:
-            'owned_projects__participants',
-        FilterType.INTERESTED: 'favorites__owner',
-        FilterType.PARTICIPANTS: 'participated_projects__owner',
-    }
 
     def get_queryset(self) -> QuerySet:
         """Return sorted, optionally filtered users."""
-        qs = User.objects.all().order_by('-id')
-        filter_type = self.request.GET.get('filter')
+        qs = User.objects.all().order_by("-id")
+        filter_type = self.request.GET.get("filter")
         user = self.request.user
 
         if filter_type and user.is_authenticated:
@@ -74,7 +70,7 @@ class UserListView(ListView):
 
     def get_context_data(self, **kwargs: Any) -> dict:
         context = super().get_context_data(**kwargs)
-        context['active_filter'] = self.request.GET.get('filter', '')
+        context["active_filter"] = self.request.GET.get("filter", "")
         return context
 
 
@@ -82,31 +78,29 @@ class UserDetailView(DetailView):
     """User profile."""
 
     model = User
-    template_name = 'users/user-details.html'
-    context_object_name = 'user'
+    template_name = "users/user-details.html"
+    context_object_name = "user"
 
 
 class ProfileEditView(LoginRequiredMixin, UpdateView):
     model = User
     form_class = ProfileEditForm
-    template_name = 'users/edit_profile.html'
+    template_name = "users/edit_profile.html"
 
-    def get_object(
-        self, queryset: QuerySet | None = None
-    ) -> User | AnonymousUser:
+    def get_object(self, queryset: QuerySet | None = None) -> User | AnonymousUser:
         """Edit current user."""
         return self.request.user
 
     def get_success_url(self) -> Any:
 
-        return reverse('users:profile', kwargs={'pk': self.request.user.pk})
+        return reverse("users:profile", kwargs={"pk": self.request.user.pk})
 
 
 class PasswordChangeView(LoginRequiredMixin, AuthPasswordChangeView):
     """Password change view."""
 
-    template_name = 'users/change_password.html'
+    template_name = "users/change_password.html"
 
     def get_success_url(self) -> Any:
         """Redirect to profile view."""
-        return reverse('users:profile', kwargs={'pk': self.request.user.pk})
+        return reverse("users:profile", kwargs={"pk": self.request.user.pk})
