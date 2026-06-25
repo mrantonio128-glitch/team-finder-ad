@@ -34,17 +34,17 @@
                     {% if user.github_url %}
                     <span>{% include 'includes/svg/github.html' %}
                         <a href="{{ user.github_url }}" target="_blank">GitHub</a>
+                        {% if request.user.id == user.id %}
+                        <button type="button" class="copy-link-icon" data-url="/users/{{ user.id }}" aria-label="Копировать ссылку">
+                            {% include 'includes/svg/share.html' %}
+                        </button>
+                        {% endif %}
                     </span>
                     {% endif %}
                 </div>
             </div>
         </div>
         <div class="profile-actions">
-            <a href="#"
-               class="black-button black-button-share share-button"
-               data-url="/users/{{ user.id }}">
-                {% include 'includes/svg/share.html' %}
-            </a>
             {% if request.user.id == user.id %}
             <a href="/users/edit-profile" class="black-button">
                 {% include 'includes/svg/pen.html' %}
