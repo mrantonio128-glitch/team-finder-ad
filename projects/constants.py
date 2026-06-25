@@ -1,0 +1,10 @@
+"""Project constants."""
+
+PROJECT_NAME_MAX_LENGTH = 200
+PROJECT_STATUS_MAX_LENGTH = 6  # ???
+PROJECTS_PAGINATE_BY = 12
+
+API_STATUS_OK = 'ok'
+API_STATUS_ERR = 'error'
+
+ERR_MSG_ACTION_NOT_ALLOWED = 'Action not allowed'
